@@ -6,7 +6,7 @@ const CONFIG = {
     brand: "Smilentine",
     startDate: "2026-02-07",
     valentineDate: "2026-02-14",
-    isLive: false // SET TO TRUE FOR FINAL DEPLOYMENT
+    isLive: true // SET TO TRUE FOR FINAL DEPLOYMENT
 };
 
 /**
@@ -145,43 +145,43 @@ const DAYS = [
     {
         date: "02-07",
         title: "Rose Day",
-        img: "rose-day.png",
+        img: "img/rose-day.png",
         text: "Every rose has its beauty, but none can match the radiance of your smile. This day is all about celebrating you! 💖"
     },
     {
         date: "02-08",
         title: "Propose Day",
-        img: "propose-day.png",
+        img: "img/propose-day.png",
         text: "I might have a thousand things to say, but for now, let's just say you make my world a lot brighter. Stay tuned for the big one! ✨"
     },
     {
         date: "02-09",
         title: "Chocolate Day",
-        img: "chocolate-day.png",
+        img: "img/chocolate-day.png",
         text: "Chocolates are sweet, but your laughter is my favorite treat. Wishing you a day as sweet as you are! 🍫"
     },
     {
         date: "02-10",
         title: "Teddy Day",
-        img: "teddy-day.png",
+        img: "img/teddy-day.png",
         text: "Whenever you feel lonely, just remember I'm sending you a giant virtual hug today. You're my favorite teddy! 🧸"
     },
     {
         date: "02-11",
         title: "Promise Day",
-        img: "promise-day.png",
+        img: "img/promise-day.png",
         text: "I promise to be the reason behind your smile, to support you, and to cherish every moment we share. Always. 🤞💗"
     },
     {
         date: "02-12",
         title: "Kiss Day",
-        img: "kiss-day.png",
+        img: "img/kiss-day.png",
         text: "Sending a million virtual kisses to the girl who stole my heart with just one look. You're simply addictive! 💋"
     },
     {
         date: "02-14",
         title: "Smilentine",
-        img: "valentines-day.png",
+        img: "img/valentines-day.png",
         text: "We've made it! After all these days, I have just one question... Will you make me the happiest person and be my Smilentine? 💖",
         proposal: true
     }
@@ -351,7 +351,7 @@ function renderWaitingRoom() {
 
     card.innerHTML = `
         <div style="margin-bottom: 20px;">
-            <img src="hearts.png" alt="Love" style="width: 80px; height: auto;">
+            <img src="img/hearts.png" alt="Love" style="width: 80px; height: auto;">
         </div>
         <h1 style="font-size: 2.5rem; margin-top: 10px;">${CONFIG.brand}</h1>
         <h2 style="font-family: 'Dancing Script'; font-size: 1.8rem;">Hey ${CONFIG.name}, welcome!</h2>
@@ -462,7 +462,7 @@ function showSequence(messages, finalCallback) {
         if (step < messages.length) {
             card.innerHTML = `
                 <div style="margin-bottom: 15px;">
-                    <img src="hearts.png" alt="Wait" style="width: 60px; height: auto;">
+                    <img src="img/hearts.png" alt="Wait" style="width: 60px; height: auto;">
                 </div>
                 <h1 style="font-size: 2.2rem; font-family: 'Dancing Script';">Wait...</h1>
                 <p style="font-size: 1.2rem; margin: 20px 0; color: #6a0036;">${messages[step]}</p>
@@ -534,14 +534,14 @@ function handleYesProposal() {
 
         card.innerHTML = `
             <div style="background: white; border-radius: 25px; padding: 10px; display: inline-block; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(255,77,109,0.3);">
-                <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" 
+                <img src="img/cute-love-bear-roses.gif" 
                      alt="Love Bear" 
                      style="width: 150px; border-radius: 15px; display: block;">
             </div>
             <h1 style="font-size: 3.5rem; color: #ff4d6d; font-family: 'Dancing Script'; text-shadow: 0 0 15px rgba(255,77,109,0.4);">${option.headline}</h1>
             <p style="font-size: 1.3rem; color: #ff8fa3;">${option.message}</p>
             <div style="margin-top: 20px;">
-                <img src="balloons.png" style="width: 80px; animation: heartBeat 1.2s infinite alternate;">
+                <img src="img/balloons.png" style="width: 80px; animation: heartBeat 1.2s infinite alternate;">
             </div>
         `;
         celebrateLarge();
@@ -618,7 +618,7 @@ function celebrateLarge() {
 
 function renderAllDays() {
     card.innerHTML = `
-        <div style="margin-bottom: 15px;"><img src="hearts.png" style="width: 60px;"></div>
+        <div style="margin-bottom: 15px;"><img src="img/hearts.png" style="width: 60px;"></div>
         <h1 style="font-size: 2.2rem; font-family: 'Dancing Script';">✨ Preview Mode</h1>
         <button class="yes" style="width: 100%; margin: 10px 0;" onclick="renderWaitingRoom()">Preview Waiting Room</button>
         ${DAYS.map(d => `
