@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Smilentine 💖 | For My Smiley</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A special romantic countdown for someone special.">
+
+    <!-- Romantic & Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- External Libraries for Premium Effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Background Canvas for animations -->
+    <div id="bg-canvas"></div>
+
+    <div class="music-card">
+        <button id="musicPrev" class="music-btn">⏮️</button>
+        <div id="musicToggle" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <span id="musicIcon">🎧</span> <span id="musicText">Tap for vibe</span>
+        </div>
+        <button id="musicNext" class="music-btn">⏭️</button>
+    </div>
+
+    <audio id="bgMusic">
+        <source src="music/love.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="container">
+        <main class="card" id="card">
+            <!-- Content will be injected by app.js -->
+            <div class="loader">💖</div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
