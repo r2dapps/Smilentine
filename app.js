@@ -75,6 +75,21 @@ const PLAYFUL_CHALLENGES = [
         task: "Which city should we visit together first? ✈️🌍",
         interact: "Pack your bags! 🧳",
         onComplete: () => celebrate()
+    },
+    {
+        task: "If you could rename me to something cute, what would it be? 📛",
+        interact: "I have a name! 🥰",
+        onComplete: () => celebrate()
+    },
+    {
+        task: "Quick challenge: Close your eyes and think of our best memory. Click when you see it! ✨",
+        interact: "Memories... ❤️",
+        onComplete: () => celebrate()
+    },
+    {
+        task: "Send me a heart emoji on WhatsApp right now and then click this! 📱💖",
+        interact: "Sent! 💌",
+        onComplete: () => celebrate()
     }
 ];
 
@@ -138,7 +153,18 @@ const QUOTES = [
     "Ee wait antha oka silent smile kosam",
     "Nee presence alone makes things lighter",
     "Cute moments rush cheyyakudadhu",
-    "Nee smile… ade chaalu 💖"
+    "Nee smile… ade chaalu 💖",
+    "Prathi roju ninnu chusthe, adho kotha energy 🌟",
+    "Nuvvu navvuthunte, lokam antha calm ga anipisthundi",
+    "Some feelings are better felt than said... like this one 💌",
+    "Nee voice vinte chaalu, day motham set ayipothundi",
+    "Every day is a bit better because you're in it ✨",
+    "Nuvvu pakkana unte, time ela velthundo teliyadhu ⏳",
+    "Mee smile is the most beautiful curve in the world 😍",
+    "Konni sarlu silent ga undadam lo kuda oka prema untundi",
+    "Nuvu na favorite notification vi! 📱❤️",
+    "Life is short, but your smile makes it look like a dream",
+    "Nee thoti gadipina prathi second oka beautiful memory"
 ];
 
 const DAYS = [
@@ -177,6 +203,12 @@ const DAYS = [
         title: "Kiss Day",
         img: "img/kiss-day.png",
         text: "Sending a million virtual kisses to the girl who stole my heart with just one look. You're simply addictive! 💋"
+    },
+    {
+        date: "02-13",
+        title: "Hug Day",
+        img: "img/hug-day.png", // Ensure this image exists or provide a fallback
+        text: "A warm hug can say what words cannot. Consider this a giant, warm, fuzzy virtual hug from me to you! 🤗✨"
     },
     {
         date: "02-14",
@@ -504,18 +536,40 @@ function renderDay(day) {
     const oldNo = document.getElementById("noBtn");
     if (oldNo) oldNo.remove();
 
+    // Pick a random quote and challenge for this view
+    const quote = randomQuote();
+    const challengeIndex = Math.floor(Math.random() * PLAYFUL_CHALLENGES.length);
+    const challenge = PLAYFUL_CHALLENGES[challengeIndex];
+
     card.innerHTML = `
         <div style="margin-bottom: 15px;">
-            <img src="${day.img}" alt="${day.title}" style="width: 120px; height: auto; filter: drop-shadow(0 5px 15px rgba(255,143,163,0.3));">
+            <img src="${day.img}" alt="${day.title}" style="width: 120px; height: auto; filter: drop-shadow(0 5px 15px rgba(255,143,163,0.3));" onerror="this.src='img/hearts.png'">
         </div>
         <h1 style="font-size: 2.8rem; font-family: 'Dancing Script';">${day.title}</h1>
-        <p style="font-size: 1.1rem; line-height: 1.6;">${day.text}</p>
-        ${day.proposal ? `
-            <div class="btn-group">
-                <button class="yes" onclick="handleYesProposal()">YES! 💕</button>
-                <button class="no" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">NO 🙈</button>
-            </div>
-        ` : `<button class="yes" onclick="celebrate()">Receive Love 💖</button>`}
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">${day.text}</p>
+        
+        <div class="dynamic-section" style="border-top: 1px solid rgba(255,77,109,0.2); padding-top: 20px; margin-top: 10px;">
+            <p style="font-style: italic; color: var(--secondary); margin-bottom: 15px;">"${quote}"</p>
+            
+            ${day.proposal ? `
+                <div class="btn-group">
+                    <button class="yes" onclick="handleYesProposal()">YES! 💕</button>
+                    <button class="no" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">NO 🙈</button>
+                </div>
+            ` : `
+                <div class="challenge-box" style="background: rgba(255, 77, 109, 0.05); padding: 15px; border-radius: 20px; margin-bottom: 20px;">
+                    <p style="font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 8px;">✨ Today's Vibe Task:</p>
+                    <p style="font-size: 1rem; margin-bottom: 15px;">${challenge.task}</p>
+                    <div id="challenge-action">
+                        ${Array.isArray(challenge.interact)
+            ? challenge.interact.map(btn => `<button class="yes" style="margin: 5px; padding: 10px 20px; font-size: 0.9rem;" onmouseover="handleTaskInteraction(event, ${challengeIndex})" onclick="handleTaskInteraction(event, ${challengeIndex}, true, '${btn}')">${btn}</button>`).join('')
+            : `<button class="yes" style="padding: 10px 20px; font-size: 0.9rem;" onmouseover="handleTaskInteraction(event, ${challengeIndex})" onclick="handleTaskInteraction(event, ${challengeIndex}, true, null)">${challenge.interact}</button>`
+        }
+                    </div>
+                </div>
+                <button class="yes" style="width: 100%;" onclick="celebrate(); renderDay(DAYS.find(d => d.date === '${day.date}'))">Receive Love 💖</button>
+            `}
+        </div>
     `;
 }
 
