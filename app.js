@@ -319,9 +319,23 @@ const card = document.getElementById("card");
 const audio = document.getElementById("bgMusic");
 const musicIcon = document.getElementById("musicIcon");
 const musicText = document.getElementById("musicText");
-const today = new Date();
-const mmdd = today.toISOString().slice(5, 10);
-const startDateTime = new Date(CONFIG.startDate + "T00:00:00").getTime();
+// Compute current date in IST (Indian Standard Time, UTC+5:30)
+const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
+const istNow = new Date(Date.now() + IST_OFFSET_MS);
+// Use UTC getters on the shifted timestamp so the components reflect IST
+const mm = String(istNow.getUTCMonth() + 1).padStart(2, '0');
+const dd = String(istNow.getUTCDate()).padStart(2, '0');
+const mmdd = `${mm}-${dd}`;
+
+// Helper: get timestamp (ms) for midnight of a given YYYY-MM-DD date interpreted in IST
+function istMidnightTimestamp(dateStr) {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    // Date.UTC gives midnight UTC for that date; subtract IST offset to get the equivalent UTC timestamp
+    return Date.UTC(y, m - 1, d) - IST_OFFSET_MS;
+}
+
+const startDateTime = istMidnightTimestamp(CONFIG.startDate);
+const valentineTime = istMidnightTimestamp(CONFIG.valentineDate);
 
 const PLAYLIST = [
     { title: "Love 1", file: "music/Love (1).mp3" },
@@ -362,7 +376,6 @@ init();
 function updateBackgroundState() {
     const body = document.body;
     const now = Date.now();
-    const valentineTime = new Date(CONFIG.valentineDate + "T00:00:00").getTime();
 
     if (now >= valentineTime) {
         body.style.background = "linear-gradient(135deg, #ff4d6d 0%, #b1005a 100%)";
