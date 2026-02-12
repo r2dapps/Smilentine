@@ -200,15 +200,15 @@ const DAYS = [
     },
     {
         date: "02-12",
-        title: "Kiss Day",
-        img: "img/kiss-day.png",
-        text: "Sending a million virtual kisses to the girl who stole my heart with just one look. You're simply addictive! 💋"
-    },
-    {
-        date: "02-13",
         title: "Hug Day",
         img: "img/hug-day.png", // Ensure this image exists or provide a fallback
         text: "A warm hug can say what words cannot. Consider this a giant, warm, fuzzy virtual hug from me to you! 🤗✨"
+    },
+    {
+        date: "02-13",
+        title: "Kiss Day",
+        img: "img/kiss-day.png",
+        text: "Counting down to a real kiss—until then, here's a thousand tiny virtual ones just for you. 💋"
     },
     {
         date: "02-14",
